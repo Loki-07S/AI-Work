@@ -139,3 +139,4 @@ Visit `http://localhost:3000` to register, grab your CLI login token, and view s
 ## 📄 License
 
 MIT © [Loki-07S](https://github.com/Loki-07S)
+
