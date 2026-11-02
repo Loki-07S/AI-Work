@@ -1,0 +1,16 @@
+{
+  "name": "aiwork",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Task-centric workspace for AI coding agent activity",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev:cli": "pnpm --filter @aiwork/cli dev",
+    "typecheck": "pnpm -r run typecheck",
+    "aiwork": "pnpm --filter @aiwork/cli exec node dist/bin.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.15.9"
+}

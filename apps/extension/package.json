@@ -1,0 +1,109 @@
+{
+  "name": "aiwork",
+  "displayName": "AIWork",
+  "description": "Task-centric timeline for AI coding agent activity",
+  "version": "0.1.0",
+  "publisher": "aiwork",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aiwork",
+          "title": "AIWork",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "aiwork": [
+        {
+          "id": "aiwork.tasks",
+          "name": "Tasks"
+        },
+        {
+          "id": "aiwork.timeline",
+          "name": "Timeline"
+        },
+        {
+          "id": "aiwork.files",
+          "name": "File changes"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "aiwork.refresh",
+        "title": "AIWork: Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "aiwork.createTask",
+        "title": "AIWork: Create Task"
+      },
+      {
+        "command": "aiwork.pinTask",
+        "title": "AIWork: Pin Task as Active"
+      },
+      {
+        "command": "aiwork.search",
+        "title": "AIWork: Search History"
+      },
+      {
+        "command": "aiwork.checkpoint",
+        "title": "AIWork: Create Checkpoint"
+      },
+      {
+        "command": "aiwork.openEventFile",
+        "title": "AIWork: Open File from Event"
+      },
+      {
+        "command": "aiwork.showDecisionSources",
+        "title": "AIWork: Show Decision Sources"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "aiwork.refresh",
+          "when": "view == aiwork.tasks || view == aiwork.timeline || view == aiwork.files",
+          "group": "navigation"
+        },
+        {
+          "command": "aiwork.createTask",
+          "when": "view == aiwork.tasks",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "aiwork.pinTask",
+          "when": "view == aiwork.tasks"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --external:better-sqlite3 --format=cjs --platform=node --sourcemap",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package": "pnpm run build"
+  },
+  "dependencies": {
+    "@aiwork/db": "workspace:*",
+    "@aiwork/core": "workspace:*",
+    "better-sqlite3": "^11.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.2"
+  }
+}
